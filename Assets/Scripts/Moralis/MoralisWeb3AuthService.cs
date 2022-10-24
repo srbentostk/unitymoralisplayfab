@@ -149,7 +149,8 @@ public class MoralisWeb3AuthService : MonoBehaviour
             if (!String.IsNullOrEmpty(result.FunctionResult.ToString()))
             {
                 authenticationKit.State = AuthenticationKitState.WalletSigned;
-                
+                Debug.Log("Web3 Authentication successful!");
+                Debug.Log(result.FunctionResult);
                 // On success fire the OnSuccess event
                 OnSucces.Invoke();
             }

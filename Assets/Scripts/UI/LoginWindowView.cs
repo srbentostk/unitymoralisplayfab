@@ -37,9 +37,9 @@ public class LoginWindowView : MonoBehaviour
 
 
 // testando customID
-public Button CustomIDButton;
+
 private void RegistrarCustomId(){
-    var request = new LoginWithCustomIDRequest { CustomId = "ID001", CreateAccount = true };
+    var request = new LoginWithCustomIDRequest { CustomId = "ID002", CreateAccount = true };
     PlayFabClientAPI.LoginWithCustomID(request, OnCustomLoginSuccess, OnCustomLoginFailure);
 
 }
@@ -61,7 +61,7 @@ private void RegistrarCustomId(){
     public InputField Password;
     public InputField ConfirmPassword;
     public Toggle RememberMe;
-
+    public Button CustomIDButton;
     public Button LoginButton;
     public Button PlayAsGuestButton;
     public Button RegisterButton;
@@ -118,7 +118,7 @@ private void RegistrarCustomId(){
         PlayFabAuthService.OnPlayFabError += OnPlayFaberror;
 
         // Bind to UI buttons to perform actions when user interacts with the UI.
-        CustomIDButton.onClick.AddListener(RegistrarCustomId);
+        //CustomIDButton.onClick.AddListener(RegistrarCustomId);
         LoginButton.onClick.AddListener(OnLoginClicked);
         PlayAsGuestButton.onClick.AddListener(OnPlayAsGuestClicked);
         RegisterButton.onClick.AddListener(OnRegisterButtonClicked);

@@ -1,6 +1,13 @@
+using System.Runtime.InteropServices;
+//using System.Diagnostics;
 using System;
 using System.Collections.Generic;
 using PlayFab;
+
+using PlayFab.ClientModels;
+using PlayFab.Internal;
+using UnityEngine.UI;
+
 using PlayFab.CloudScriptModels;
 using UnityEngine;
 using UnityEngine.Events;
@@ -33,22 +40,33 @@ public class MoralisWeb3AuthService : MonoBehaviour
         switch (authenticationKitState)
         {
             case AuthenticationKitState.WalletConnected:
-
-#if !UNITY_WEBGL
+            #if !UNITY_WEBGL
                 // Get the address and chainid with WalletConnect 
                 string address = WalletConnect.ActiveSession.Accounts[0];
                 int chainid = WalletConnect.ActiveSession.ChainId;
-#else
+            #else
                 // Get the address and chainid with Web3 
                 string address = Web3GL.Account().ToLower();
                 int chainid = Web3GL.ChainId();
-#endif
+            #endif
                 // Create sign message 
                 CreateMessage(address, chainid);
+
+                //registrar CustomID com address da carteira
+                var request = new LinkCustomIDRequest { CustomId = address};
+                PlayFabClientAPI.LinkCustomID(request, OnCustomIdSuccess, OnCustomIdFailure);
+                //fim do registrar CustomID
+
+
                 break;
         }
     }
-
+    public void OnCustomIdSuccess(LinkCustomIDResult obj){
+        Debug.Log($"Oops Something went right!");
+    }
+    public void OnCustomIdFailure(PlayFabError obj){
+        Debug.Log($"Oops Something went wrong");
+    }
     private void CreateMessage(string address, int chainid)
     {
         // Get message from Moralis with PlayFab Azure Functions 

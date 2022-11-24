@@ -49,6 +49,7 @@ public class MoralisWeb3AuthService : MonoBehaviour
                 string address = Web3GL.Account().ToLower();
                 int chainid = Web3GL.ChainId();
             #endif
+            
                 // Create sign message 
                 CreateMessage(address, chainid);
 
@@ -63,6 +64,7 @@ public class MoralisWeb3AuthService : MonoBehaviour
 
 
                 break;
+
         }
     }
     public void StateObservable_OnValueChangedLink(AuthenticationKitState authenticationKitState)
@@ -106,11 +108,11 @@ public class MoralisWeb3AuthService : MonoBehaviour
         // Get message from Moralis with PlayFab Azure Functions 
         PlayFabCloudScriptAPI.ExecuteFunction(new ExecuteFunctionRequest()
         {
-            Entity = new PlayFab.CloudScriptModels.EntityKey()
-            {
-                Id = PlayFabSettings.staticPlayer.EntityId, //Get this from when you logged in,
-                Type = PlayFabSettings.staticPlayer.EntityType, //Get this from when you logged in
-            },
+            // Entity = new PlayFab.CloudScriptModels.EntityKey()
+            // {
+            //     Id = PlayFabSettings.staticPlayer.EntityId, //Get this from when you logged in,
+            //     Type = PlayFabSettings.staticPlayer.EntityType, //Get this from when you logged in
+            // },
             FunctionName = "ChallengeRequest", //This should be the name of your Azure Function that you created.
             FunctionParameter =
                 new Dictionary<string, object>() //This is the data that you would want to pass into your function.
@@ -172,11 +174,11 @@ public class MoralisWeb3AuthService : MonoBehaviour
         // Send the message and signature to the Authenticate Azure function for validation
         PlayFabCloudScriptAPI.ExecuteFunction(new ExecuteFunctionRequest()
         {
-            Entity = new PlayFab.CloudScriptModels.EntityKey()
-            {
-                Id = PlayFabSettings.staticPlayer.EntityId, //Get this from when you logged in,
-                Type = PlayFabSettings.staticPlayer.EntityType, //Get this from when you logged in
-            },
+            // Entity = new PlayFab.CloudScriptModels.EntityKey()
+            // {
+            //     Id = PlayFabSettings.staticPlayer.EntityId, //Get this from when you logged in,
+            //     Type = PlayFabSettings.staticPlayer.EntityType, //Get this from when you logged in
+            // },
             FunctionName = "ChallengeVerify", //This should be the name of your Azure Function that you created.
             FunctionParameter =
                 new Dictionary<string, object>() //This is the data that you would want to pass into your function.

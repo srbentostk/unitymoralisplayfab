@@ -52,17 +52,51 @@ public class MoralisWeb3AuthService : MonoBehaviour
                 // Create sign message 
                 CreateMessage(address, chainid);
 
-                //registrar CustomID com address da carteira
-                var request = new LinkCustomIDRequest { CustomId = address};
-                PlayFabClientAPI.LinkCustomID(request, OnCustomIdSuccess, OnCustomIdFailure);
+                //linkar CustomID com address da carteira FUNCIONANDO
+                // var request = new LinkCustomIDRequest { CustomId = address};
+                // PlayFabClientAPI.LinkCustomID(request, OnCustomIdSuccess, OnCustomIdFailure);
+                //fim do linkar CustomID
+                //registrar CustomID com address da carteira TESTANDO
+                var requestLogin = new LoginWithCustomIDRequest { CustomId = address, CreateAccount = true};
+                PlayFabClientAPI.LoginWithCustomID(requestLogin, OnCustomLoginIdSuccess, OnCustomIdFailure);
                 //fim do registrar CustomID
 
 
                 break;
         }
     }
+    public void StateObservable_OnValueChangedLink(AuthenticationKitState authenticationKitState)
+    {
+        switch (authenticationKitState)
+        {
+            case AuthenticationKitState.WalletConnected:
+            #if !UNITY_WEBGL
+                // Get the address and chainid with WalletConnect 
+                string address = WalletConnect.ActiveSession.Accounts[0];
+                int chainid = WalletConnect.ActiveSession.ChainId;
+            #else
+                // Get the address and chainid with Web3 
+                string address = Web3GL.Account().ToLower();
+                int chainid = Web3GL.ChainId();
+            #endif
+                // Create sign message 
+                CreateMessage(address, chainid);
+
+                //linkar CustomID com address da carteira FUNCIONANDO
+                var request = new LinkCustomIDRequest { CustomId = address};
+                PlayFabClientAPI.LinkCustomID(request, OnCustomIdSuccess, OnCustomIdFailure);
+                //fim do linkar CustomID
+
+
+
+                break;
+        }
+    }
     public void OnCustomIdSuccess(LinkCustomIDResult obj){
-        Debug.Log($"Oops Something went right!");
+        Debug.Log($"Oops Something on link went right!");
+    }
+    public void OnCustomLoginIdSuccess(LoginResult obj){
+        Debug.Log($"Oops Something on login went right!");
     }
     public void OnCustomIdFailure(PlayFabError obj){
         Debug.Log($"Oops Something went wrong");

@@ -69,6 +69,7 @@ private void RegistrarCustomId(){
     public Button ClearSigninButton;
     public Button ResetSampleButton;
     public Button ConnectWalletButton;
+    public Button RegisterWalletButton;
 
     // Meta references to panels we need to show / hide
     public GameObject RegisterPanel;
@@ -76,7 +77,7 @@ private void RegistrarCustomId(){
     public GameObject LoginPanel;
     public GameObject LoggedinPanel;
     public Text StatusText;
-    public Text UserName;
+    public Text UsernameLabel;
 
     // Settings for what data to get from playfab on login.
     public GetPlayerCombinedInfoRequestParams InfoRequestParams;
@@ -145,7 +146,8 @@ private void RegistrarCustomId(){
         SigninPanel.SetActive(false);
         LoginPanel.SetActive(true);
         LoggedinPanel.SetActive(true);
-        UserName.text = result.InfoResultPayload.AccountInfo.Username ?? result.PlayFabId;
+        //UserName.text = result.InfoResultPayload.AccountInfo.Username ?? result.PlayFabId;
+        UsernameLabel.text = result.InfoResultPayload.AccountInfo.PlayFabId ;
     }
 
     /// <summary>

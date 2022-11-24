@@ -36,6 +36,22 @@ public class LoginWindowView : MonoBehaviour
 //     }
 
 
+// testando customID
+public Button CustomIDButton;
+private void RegistrarCustomId(){
+    var request = new LoginWithCustomIDRequest { CustomId = "ID001", CreateAccount = true };
+    PlayFabClientAPI.LoginWithCustomID(request, OnCustomLoginSuccess, OnCustomLoginFailure);
+
+}
+    public void OnCustomLoginSuccess(LoginResult obj) {     
+        Debug.Log("Login with CustomID succeeded.");     
+    }
+    public void OnCustomLoginFailure(PlayFabError obj) {     
+        Debug.Log("Login with CustomID failed.");
+    }
+    
+
+
     //End of customized code that i want
     // Debug Flag to simulate a reset
     public bool ClearPlayerPrefs;
@@ -102,6 +118,7 @@ public class LoginWindowView : MonoBehaviour
         PlayFabAuthService.OnPlayFabError += OnPlayFaberror;
 
         // Bind to UI buttons to perform actions when user interacts with the UI.
+        CustomIDButton.onClick.AddListener(RegistrarCustomId);
         LoginButton.onClick.AddListener(OnLoginClicked);
         PlayAsGuestButton.onClick.AddListener(OnPlayAsGuestClicked);
         RegisterButton.onClick.AddListener(OnRegisterButtonClicked);

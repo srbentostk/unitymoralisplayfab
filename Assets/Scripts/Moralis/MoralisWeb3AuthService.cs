@@ -84,13 +84,13 @@ public class MoralisWeb3AuthService : MonoBehaviour
             {
                 authenticationKit.State = AuthenticationKitState.WalletSigning;
                 
-#if !UNITY_WEBGL
+                #if !UNITY_WEBGL
                 // Sign the message with WalletConnect
                 string signature = await WalletConnect.ActiveSession.EthPersonalSign(address, message);
-#else
+                #else
                 // Sign the message with Web3
                 string signature = await Web3GL.Sign(message);
-#endif
+                #endif
                 if (!String.IsNullOrEmpty(signature))
                 {
                     // Send the message and signature to the Authenticate Azure function for validation

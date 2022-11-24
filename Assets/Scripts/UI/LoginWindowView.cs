@@ -168,6 +168,7 @@ public class LoginWindowView : MonoBehaviour
     {
         //Here we have choses what to do when AuthType is None.
         LoginPanel.SetActive(true);
+        SigninPanel.SetActive(true);
         LoggedinPanel.SetActive(false);
         StatusText.text = "";
 
@@ -239,6 +240,7 @@ public class LoginWindowView : MonoBehaviour
         // Show panels
         RegisterPanel.SetActive(false);
         SigninPanel.SetActive(true);
+        LoginPanel.SetActive(true);
     }
 
     private void OnClearSigninButtonClicked()

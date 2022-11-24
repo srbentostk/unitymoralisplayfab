@@ -14,6 +14,29 @@ using PlayFab.Internal;
 
 public class LoginWindowView : MonoBehaviour
 {
+    //Customized code to implement functions that i want
+   //[SerializeField] GameObject LoginPanel, RegisterPanel, SigninPanel, LoggedInStackPanel;
+    //public Text registerUsername, registerPassword, confirmPassword, Username, Password, errorSignUp, errorLogIn;
+    // string encryptedPassword;
+// [SerializeField] GameObject LoggedInStackPanel;
+//     public void SwitchToRegisterPanel(){
+//         RegisterPanel. SetActive(true);
+//         SigninPanel.SetActive(false);
+//         LoggedInStackPanel.SetActive(false);
+//     }
+//     public void SwitchToSigninPanel(){
+//         RegisterPanel.SetActive(false);
+//         SigninPanel.SetActive(true);
+//         LoggedInStackPanel.SetActive(false);
+//     }
+//     public void SwitchToLoggedInStackPanel(){
+//         RegisterPanel.SetActive(false);
+//         SigninPanel.SetActive(false);
+//         LoggedInStackPanel.SetActive(true);
+//     }
+
+
+    //End of customized code that i want
     // Debug Flag to simulate a reset
     public bool ClearPlayerPrefs;
 
@@ -102,7 +125,8 @@ public class LoginWindowView : MonoBehaviour
     {
         Debug.LogFormat("Logged In as: {0}", result.PlayFabId);
         StatusText.text = "";
-        LoginPanel.SetActive(false);
+        SigninPanel.SetActive(false);
+        LoginPanel.SetActive(true);
         LoggedinPanel.SetActive(true);
         UserName.text = result.InfoResultPayload.AccountInfo.Username ?? result.PlayFabId;
     }
